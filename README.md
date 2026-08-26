@@ -2,7 +2,7 @@
 
 LibreTranslate MCP — thin abstraction over any LibreTranslate-compatible instance.
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1394+ live data sources.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1476+ live data sources.
 
 ## Tools
 
@@ -27,6 +27,22 @@ Configure via:
 
 Standard LibreTranslate v1 API — see [the spec](https://github.com/LibreTranslate/LibreTranslate#api).
 
+## Public instances (verified 2026-08-06)
+
+Every free public instance this pack could have defaulted to is gone, so there is no keyless path. Checked on the date above:
+
+| Instance | Result |
+|---|---|
+| `translate.argosopentech.com` | does not resolve |
+| `libretranslate.com` | 400, key required |
+| `translate.terraprint.co` | 502 |
+| `lt.vern.cc` | 502 |
+| `translate.fedilab.app` | 403 |
+| `libretranslate.eownerdead.dedyn.io` | 403 |
+| `trans.zillyhuhn.com` | 403 |
+
+Unconfigured, every tool now returns `{found: false, reason: "requires_endpoint"}` naming `deepl_translate` — rather than throwing, which booked as a tool error and was indistinguishable in the logs from the upstream being down. The pack is in the gateway's `BYO_ONLY_KEY_PACKS` so routing sinks it below the translation tool that can answer without the caller's key.
+
 ## Quick Start
 
 Add to your MCP client (Claude Desktop, Cursor, Windsurf, etc.):
@@ -41,7 +57,25 @@ Add to your MCP client (Claude Desktop, Cursor, Windsurf, etc.):
 }
 ```
 
-Or connect to the full Pipeworx gateway for access to all 1394+ data sources:
+### What this endpoint actually serves
+
+`tools/list` at `https://gateway.pipeworx.io/libretranslate/mcp` returns the tools in the table
+above **plus the shared Pipeworx meta-tools** — `ask_pipeworx`,
+`discover_tools`, `search_within`, `remember`/`recall` and the rest of the
+gateway-wide set. So the tool count you see is larger than this table: a
+single-pack endpoint currently lists roughly 30 shared tools alongside the
+pack's own. The connection's `initialize` response states its exact scope, and
+is the authoritative answer for a given day.
+
+This is deliberate, not multiplexing by accident. The meta-tools are what let a
+scoped connection answer a question this pack does not cover — via
+`ask_pipeworx`, which routes across the whole catalog — without you adding a
+second MCP server. There is currently no way to mount a pack endpoint without
+them; if the extra schemas cost you more context than the routing is worth,
+connect to the full gateway once rather than to several pack endpoints.
+
+Or connect to the full Pipeworx gateway to get every pack's tools listed
+directly, instead of just this one's:
 
 ```json
 {
@@ -53,9 +87,14 @@ Or connect to the full Pipeworx gateway for access to all 1394+ data sources:
 }
 ```
 
+Both URLs reach the same gateway and the same 1476+ data sources. The
+only difference is which pack's tools are listed **directly**; `ask_pipeworx`
+reaches all of them from either one.
+
 ## Using with ask_pipeworx
 
-Instead of calling tools directly, you can ask questions in plain English:
+Instead of calling tools directly, you can ask questions in plain English —
+this works on the pack endpoint above as well as on the full gateway:
 
 ```
 ask_pipeworx({ question: "your question about Libretranslate data" })
