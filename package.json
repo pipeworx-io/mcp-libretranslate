@@ -1,20 +1,32 @@
 {
   "name": "@pipeworx/mcp-libretranslate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "LibreTranslate MCP — open-source machine translation (BYO endpoint)",
   "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",
+  "bin": {
+    "mcp-libretranslate": "bin/cli.js"
+  },
   "keywords": ["mcp", "mcp-server", "model-context-protocol", "pipeworx", "libretranslate"],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pipeworx-io/mcp-libretranslate"
+    "url": "git+https://github.com/pipeworx-io/mcp-libretranslate.git"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "tsx": "^4.19.0"
+  },
   "devDependencies": {
-    "typescript": "^5.7.0"
+    "typescript": "^5.9.3",
+    "@cloudflare/workers-types": "^4.20260405.1"
+  },
+  "pipeworx": {
+    "sourceHash": "v1-2bb18753855620a3a855f41bd33da166a3f64934fc524790e8361591a5eb5b31",
+    "sourceCommit": "adb69d997f82a62e8e22b594488c7d04a227db35"
   }
 }
