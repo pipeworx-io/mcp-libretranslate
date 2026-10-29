@@ -1,0 +1,60 @@
+[
+  {
+    "name": "translate",
+    "description": "Translate text. Source can be \"auto\" to auto-detect. Returns translated text and the detected source (if applicable).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to translate"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source language code or \"auto\" (default \"auto\")"
+        },
+        "target": {
+          "type": "string",
+          "description": "Target language code (e.g., \"es\", \"fr\", \"ja\")"
+        },
+        "format": {
+          "type": "string",
+          "description": "text (default) | html",
+          "enum": [
+            "text",
+            "html"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "target"
+      ]
+    }
+  },
+  {
+    "name": "detect_language",
+    "description": "Detect the source language of a piece of text. Returns ranked language candidates with confidence.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to analyze"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    }
+  },
+  {
+    "name": "list_languages",
+    "description": "List languages supported by the configured LibreTranslate instance.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  }
+]
