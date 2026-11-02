@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-libretranslate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "LibreTranslate MCP — open-source machine translation (BYO endpoint)",
   "type": "module",
   "main": "lib/index.js",
@@ -27,7 +27,7 @@
     "mode": "gateway",
     "slug": "libretranslate",
     "gatewaySlug": "libretranslate",
-    "sourceHash": "v1-176729fa11b94c79d15bfaa8ee9e57c463d1632283e36c01714e2e6a5571a7b1",
-    "sourceCommit": "5c89d6abb778d45da5d92002eb251978622bedf9"
+    "sourceHash": "v1-ad50ac9db5f4c3551022e784aa04f51849ee740aedf7776c7a80797e99078057",
+    "sourceCommit": "236b0a46d91f343fe094da9f499c378e88f78312"
   }
 }

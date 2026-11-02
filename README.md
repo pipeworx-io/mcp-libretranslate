@@ -2,7 +2,7 @@
 
 LibreTranslate MCP — thin abstraction over any LibreTranslate-compatible instance.
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1856+ live data sources. This is an independent, unofficial integration — not affiliated with, endorsed by, or published by the upstream provider.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1865+ live data sources. This is an independent, unofficial integration — not affiliated with, endorsed by, or published by the upstream provider.
 
 ## Tools
 
@@ -41,7 +41,7 @@ Every free public instance this pack could have defaulted to is gone, so there i
 | `libretranslate.eownerdead.dedyn.io` | 403 |
 | `trans.zillyhuhn.com` | 403 |
 
-Unconfigured, every tool now returns `{found: false, reason: "requires_endpoint"}` naming `deepl_translate` — rather than throwing, which booked as a tool error and was indistinguishable in the logs from the upstream being down. The pack is in the gateway's `BYO_ONLY_KEY_PACKS` so routing sinks it below the translation tool that can answer without the caller's key.
+Unconfigured, every tool now returns `{found: false, reason: "requires_endpoint"}` naming `mymemory_translate` — rather than throwing, which booked as a tool error and was indistinguishable in the logs from the upstream being down. The pack is in the gateway's `BYO_ONLY_KEY_PACKS` so routing sinks it below the translation tools that can answer without the caller's key.
 
 ## Quick Start
 
@@ -87,7 +87,7 @@ directly, instead of just this one's:
 }
 ```
 
-Both URLs reach the same gateway and the same 1856+ data sources. The
+Both URLs reach the same gateway and the same 1865+ data sources. The
 only difference is which pack's tools are listed **directly**; `ask_pipeworx`
 reaches all of them from either one.
 
